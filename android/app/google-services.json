@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "915342448780",
+    "firebase_url": "https://prasmulcashless.firebaseio.com",
+    "project_id": "prasmulcashless",
+    "storage_bucket": "prasmulcashless.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915342448780:android:e00a130b05c25b7f",
+        "android_client_info": {
+          "package_name": "com.prasmulcashless"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915342448780-ole15k48rpljk0uncp1ok2j9oueosg0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8XFnr0EBi86S5zJydS0Ss-PLU0qTlAOU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

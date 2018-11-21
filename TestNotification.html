@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    console.log('[Testing Firebase]')
+
+    //di ambil dari Project --> Setting --> CLoud Messaging --> Legacy server key
+    var key = 'AIzaSyDR8FDEdeEV8GOblIgTt3EdgRLQeH0ftxw';
+    //var to = 'cNbZeZybjM0:APA91bE3d5xvxk_F7k1yqBXDsCwLuEAyqQl3hYdjqO8aYJPMmU6Yts4bFGytAe82X5MPbV8cesvwe01mtR-XKY67lP2-vI0fSW09YHsjcnatqiuszQJZwNAD9dkBid4xlZh3fVGZMy8qaYoL365QOp_KVfyCvD605A'
+    //var to = '915342448780'
+    var to = "/topics/prasmulApp";
+    var notification = {
+        'title': 'DISKON 20% Bakso Segar',
+        'body': 'Dapatkan diskon sehingga 20% untuk pembelian Jus Apokat sebelum 10 Agustus 2018',
+        'icon': 'firebase-logo.png',
+        'action': 'MESSAGING_EVENT'
+    };
+
+    fetch('https://fcm.googleapis.com/fcm/send', {
+        'method': 'POST',
+        'headers': {
+            'Authorization': 'key=' + key,
+            'Content-Type': 'application/json'
+        },
+        'body': JSON.stringify({
+            'notification': notification,
+            'sound': 'default',
+//            'foreground': true,
+            'to': to,
+            'data': notification,
+            'subtitle':'ini contoh dari subtitle'
+        })
+    }).then(function(response) {
+        console.log(response);
+    }).catch(function(error) {
+        console.error(error);
+    })
+</script>
+</html>
