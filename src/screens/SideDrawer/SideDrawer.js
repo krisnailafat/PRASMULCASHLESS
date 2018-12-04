@@ -40,8 +40,8 @@ class SideDrawer extends Component {
     gotoHome() {
         Promise.all([
             Icon.getImageSource(Platform.OS === 'android' ? "md-menu" : "ios-menu", 30),
-            Icon.getImageSource("ios-list-box-outline", 30),
-            Icon.getImageSource("ios-cash", 30),
+            Icon.getImageSource(Platform.OS === 'android' ? "md-home" : "ios-list-box-outline", 30),
+            Icon.getImageSource("md-list-box", 30),
             Icon.getImageSource("ios-add-circle", 30)
         ]).then(sources => {
             Navigation.startTabBasedApp({
@@ -68,7 +68,7 @@ class SideDrawer extends Component {
                         screen: 'STEMprasmul.News',
                         icon: sources[2],
                         //selectedIcon: require('../img/two_selected.png'), // iOS only
-                        title: 'STEM eCAMPUS',
+                        title: 'News',
                         navigatorButtons: {
                             leftButtons: [
                                 {
@@ -98,7 +98,7 @@ class SideDrawer extends Component {
         Promise.all([
             Icon.getImageSource(Platform.OS === 'android' ? "md-menu" : "ios-menu", 30),
             Icon.getImageSource(Platform.OS === 'android' ? "md-home" : "ios-list-box-outline", 30),
-            Icon.getImageSource("ios-cash", 30),
+            Icon.getImageSource("md-list-box", 30),
             Icon.getImageSource("ios-add-circle", 30)
         ]).then(sources => {
             Navigation.startSingleScreenApp({
@@ -131,13 +131,13 @@ class SideDrawer extends Component {
         Promise.all([
             Icon.getImageSource(Platform.OS === 'android' ? "md-menu" : "ios-menu", 30),
             Icon.getImageSource("ios-list-box-outline", 30),
-            Icon.getImageSource("ios-cash", 30),
+            Icon.getImageSource("md-list-box", 30),
             Icon.getImageSource("ios-add-circle", 30)
         ]).then(sources => {
             Navigation.startSingleScreenApp({
                 screen: {
                     screen: 'STEMprasmul.Merchant',
-                    title: 'Create Payment',
+                    title: 'Merchant',
                     navigatorButtons: {
                         leftButtons: [
                             {
@@ -147,6 +147,83 @@ class SideDrawer extends Component {
                             }
                         ]
                     }
+                },
+                drawer: {
+                    left: {
+                        screen: "STEMprasmul.SideDrawer"
+                    }
+                },
+            })
+        })
+
+
+    }
+
+    gotoTopup() {
+
+
+        Promise.all([
+            Icon.getImageSource(Platform.OS === 'android' ? "md-menu" : "ios-menu", 30),
+            Icon.getImageSource("ios-list-box-outline", 30),
+            Icon.getImageSource("md-list-box", 30),
+            Icon.getImageSource("ios-add-circle", 30)
+        ]).then(sources => {
+            Navigation.startSingleScreenApp({
+                screen: {
+                    screen: 'STEMprasmul.Topup',
+                    title: 'Top Up',
+                    navigatorButtons: {
+                        leftButtons: [
+                            {
+                                icon: sources[0],
+                                title: "Menu",
+                                id: "sideDrawerToggle"
+                            }
+                        ]
+                    }
+                },
+                drawer: {
+                    left: {
+                        screen: "STEMprasmul.SideDrawer"
+                    }
+                },
+            })
+        })
+
+
+    }
+    //Halaman history
+    gotoHistory() {
+
+
+        Promise.all([
+            Icon.getImageSource(Platform.OS === 'android' ? "md-menu" : "ios-menu", 30),
+            Icon.getImageSource("ios-list-box-outline", 30),
+            Icon.getImageSource("md-list-box", 30),
+            Icon.getImageSource("ios-add-circle", 30)
+        ]).then(sources => {
+            Navigation.startSingleScreenApp({
+                screen: {
+                    screen: 'STEMprasmul.History',
+                    title: 'History',
+                    navigatorButtons: {
+                        leftButtons: [
+                            {
+                                icon: sources[0],
+                                title: "Menu",
+                                id: "sideDrawerToggle"
+                            }
+                        ]
+                    },
+                    topTabs: [
+                        {
+                            screenId: 'STEMprasmul.History',
+                            title: 'History',
+                        },
+                        {
+                            screenId: 'STEMprasmul.OnProgress',
+                            title: 'On Progress'
+                        }]
                 },
                 drawer: {
                     left: {
@@ -246,6 +323,36 @@ class SideDrawer extends Component {
                             <View style={{ width: 45, alignItems: 'center' }}>
                                 <Entypo
                                     name="shop"
+                                    size={30}
+                                    color="white"
+                                    style={styles.drawerItemIcon}
+                                />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.gotoTopup}>
+                        <View style={styles.drawerItem2}>
+                            <View>
+                                <Text style={styles.textOnList}>Top Up</Text>
+                            </View>
+                            <View style={{ width: 45, alignItems: 'center' }}>
+                                <MaterialIcons
+                                    name="account-balance-wallet"
+                                    size={30}
+                                    color="white"
+                                    style={styles.drawerItemIcon}
+                                />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.gotoHistory}>
+                        <View style={styles.drawerItem2}>
+                            <View>
+                                <Text style={styles.textOnList}>History</Text>
+                            </View>
+                            <View style={{ width: 45, alignItems: 'center' }}>
+                                <MaterialIcons
+                                    name="receipt"
                                     size={30}
                                     color="white"
                                     style={styles.drawerItemIcon}

@@ -266,7 +266,7 @@ class Login extends Component {
         Promise.all([
             Icon.getImageSource(Platform.OS === 'android' ? "md-menu" : "ios-menu", 30),
             Icon.getImageSource(Platform.OS === 'android' ? "md-home" : "ios-list-box-outline", 30),
-            Icon.getImageSource("ios-cash", 30),
+            Icon.getImageSource("md-list-box", 30),
             Icon.getImageSource("ios-add-circle", 30)
         ]).then(sources => {
             Navigation.startTabBasedApp({
@@ -293,7 +293,7 @@ class Login extends Component {
                         screen: 'STEMprasmul.News',
                         icon: sources[2],
                         //selectedIcon: require('../img/two_selected.png'), // iOS only
-                        title: 'STEM eCAMPUS',
+                        title: 'News',
                         navigatorButtons: {
                             leftButtons: [
                                 {

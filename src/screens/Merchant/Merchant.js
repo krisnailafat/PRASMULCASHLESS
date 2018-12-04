@@ -4,7 +4,8 @@
 
 import React, { Component } from 'react';
 
-import { Platform, StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { Platform, StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Dimensions, Image, ImageBackground, ScrollView } from 'react-native';
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 import QRCode from 'react-native-qrcode';
 import Entypo from "react-native-vector-icons/Entypo";
@@ -19,20 +20,20 @@ class Merchant extends Component {
     };
 
     state = {
-        isGenerated: false
+        isGenerated: false,
+        menu: [
+            { id: 1, makan: "Burger", img: "https://i.imgur.com/rHuX2xQ.jpg" },
+            { id: 2, makan: "Pizza", img: "https://i.imgur.com/GmBg9rQ.jpg" },
+            { id: 3, makan: "Kebab", img: "https://i.imgur.com/gPCKNum.jpg" },
+            { id: 4, makan: "Kentang Goreng", img: "https://i.imgur.com/6wAAX5p.jpg" },
+            { id: 5, makan: "spaghetti", img: "https://i.imgur.com/IimCoFt.jpg" },
+
+        ]
     }
 
     constructor(props) {
         super(props);
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
-        this.state = {
-            merchant: 'PM-12345',
-
-            Text_Holder_1: '',
-
-            Text_Holder_2: ''
-
-        }
     }
 
 
@@ -46,62 +47,107 @@ class Merchant extends Component {
         }
     }
 
-
-    getTextInputValue = () => {
-        this.setState({ isGenerated: true })
-        this.setState({ Text_Holder_2: this.state.Text_Holder_1 + ';' + this.state.merchant });
-
+    renderMakan = () => {
+        return (
+            <View style={{ height: 200 }}>
+                <FlatList
+                    // contentContainerStyle={{ height: 200 }}
+                    data={this.state.menu}
+                    horizontal={true}
+                    // numColumns={2}
+                    keyExtractor={(item, index) => index.toString()} //to string bila diperlukan
+                    renderItem={(info) => {
+                        console.log('info ', info)
+                        return (
+                            <TouchableOpacity style={{ borderWidth: 0, height: 200 }}>
+                                <View style={styles.listItem}>
+                                    <Image resizeMode="cover" source={{ uri: info.item.img }} style={{ height: 150 }} />
+                                    <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{info.item.makan} </Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }}
+                />
+            </View>
+        )
     }
 
     render() {
 
         return (
-
-            <View style={styles.MainContainer}>
-
-                <View style={styles.roundIcon}>
-                    <Entypo
-                        name="shop"
-                        size={60}
-                        color="#043673"
-                        style={styles.drawerItemIcon}
-                    />
+            <ScrollView>
+                <View style={styles.MainContainer}>
+                    <View style={{ borderWidth: 0, width: '100%', height: 50, backgroundColor: '#f0f0f0', alignItems: 'flex-start', justifyContent: 'center' }}>
+                        <Text style={{ marginLeft: 20, fontSize: 16 }}>Makanan Favorite</Text>
+                    </View>
+                    {this.renderMakan()}
+                    <View style={{ marginTop: 5, borderTopWidth: 1, borderBottomWidth: 1, borderColor: "#dedede", width: '100%' }}>
+                        <TouchableOpacity style={{ height: 200, margin: 5 }}>
+                            <View style={{ width: '100%', height: '100%', }}>
+                                <ImageBackground resizeMode="cover" source={{ uri: "https://i.imgur.com/rHuX2xQ.jpg" }} style={{ width: '100%', height: '100%', borderRadius: 5 }} imageStyle={{ borderRadius: 5 }} >
+                                    <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center' }}>
+                                        {/* <Text style={{ color: 'red' }}>Centered text</Text> */}
+                                    </View>
+                                </ImageBackground>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ width: '100%', borderWidth: 0, marginTop: 5 }}>
+                        <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
+                            <TouchableOpacity style={styles.shadow}>
+                                <MaterialIcons
+                                    name="new-releases"
+                                    size={40}
+                                    color="#043673"
+                                />
+                                <Text>Baru</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.shadow}>
+                                <MaterialIcons
+                                    name="turned-in"
+                                    size={40}
+                                    color="#043673"
+                                />
+                                <Text>sale</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.shadow}>
+                            <MaterialIcons
+                                    name="room"
+                                    size={40}
+                                    color="#043673"
+                                />
+                                <Text>Dekat</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ justifyContent: 'space-around', flexDirection: 'row' }}>
+                            <TouchableOpacity style={styles.shadow}>
+                                <MaterialIcons
+                                    name="brightness-6"
+                                    size={40}
+                                    color="#043673"
+                                />
+                                <Text>24 jam</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.shadow}>
+                                <MaterialIcons
+                                    name="local-florist"
+                                    size={40}
+                                    color="#043673"
+                                />
+                                <Text>Sehat</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.shadow}>
+                            <MaterialIcons
+                                    name="restaurant"
+                                    size={40}
+                                    color="#043673"
+                                />
+                                <Text>Restoran</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                 </View>
-
-                <View style={{ paddingVertical: 10, flexDirection: "row", alignItems: 'center', borderColor: '#043673', paddingBottom: 10, marginBottom: 10, borderBottomWidth: 1 }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 16, color: '#043673' }}>Tagihan: </Text>
-                    <TextInput
-                        style={styles.TextInputStyle}
-                        onChangeText={(text) => this.setState({ Text_Holder_1: text })}
-                        underlineColorAndroid="transparent"
-                        placeholder="nilai penjualan (Rupiah)"
-                        keyboardType={'phone-pad'}
-                        onSubmitEditing={this.getTextInputValue}
-                    />
-                    {/* <TouchableOpacity onPress={this.getTextInputValue} style={styles.button} >
-
-                        <Text style={styles.TextStyle}>Generate</Text>
-
-                    </TouchableOpacity> */}
-                </View>
-
-
-
-
-                <View style={{ alignItems: 'center', backgroundColor: 'rgb(199,224,253)', width: '90%', borderRadius: 20 }}>
-                    <QRCode
-                        value={this.state.Text_Holder_2}
-                        size={250}
-                        bgColor='#000'
-                        fgColor='#fff' />
-                </View>
-
-                <View style={{ flexDirection: "row", alignItems: 'center', borderColor: '#043673', paddingTop: 10, paddingBottom: 20, borderBottomWidth: 1 }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 16, color: '#043673' }}>Nama Vendor : </Text>
-                    <Text style={{ fontWeight: 'bold', color: 'red' }}>{this.state.merchant}</Text>
-                </View>
-            </View>
-
+            </ScrollView>
         );
 
     }
@@ -113,10 +159,9 @@ const styles = StyleSheet.create({
     MainContainer: {
 
         flex: 1,
-        margin: 10,
         paddingTop: (Platform.OS === 'ios') ? 20 : 0,
         alignItems: 'center',
-        justifyContent: 'space-around'
+        // justifyContent: 'space-around'
 
 
     },
@@ -144,9 +189,24 @@ const styles = StyleSheet.create({
     },
 
     TextStyle: {
-        color: '#fff', 
+        color: '#fff',
         textAlign: 'center',
         // fontSize: 18
+    },
+    listItem: {
+        width: (Dimensions.get('window').width / 1.8) - 10,
+        margin: 5,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        backgroundColor: "#f6f6f6",
+        flexDirection: "column",
+        borderRadius: 5,
+        borderWidth: 0.5,
+        borderColor: '#f6f6f6',
+        shadowColor: '#aaaaaa',
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        elevation: 3,
     },
     roundIcon: {
         borderWidth: 1,
@@ -157,6 +217,24 @@ const styles = StyleSheet.create({
         height: 100,
         backgroundColor: '#fff',
         borderRadius: 100,
+    },
+    shadow: {
+        width: '30%',
+        height: 100,
+        margin: 5,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        backgroundColor: "#f6f6f6",
+        flexDirection: "column",
+        borderRadius: 5,
+        borderWidth: 0.5,
+        borderColor: '#f6f6f6',
+        shadowColor: '#aaaaaa',
+        shadowOpacity: 0.8,
+        shadowRadius: 5,
+        elevation: 3,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
 

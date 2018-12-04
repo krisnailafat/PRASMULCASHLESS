@@ -31,6 +31,15 @@ import MainMenu from "./src/screens/MainMenu/MainMenu";
 import News from "./src/screens/MainMenu/News";
 import EPayment from "./src/screens/EPayment/EPayment";
 import Merchant from "./src/screens/Merchant/Merchant";
+import Topup from "./src/screens/Topup/Topup";
+import History from "./src/screens/History/History"
+import OnProgress from "./src/screens/History/OnProgress"
+import ReadNews from "./src/screens/MainMenu/ReadNews"
+import Pulsa from "./src/screens/EPayment/Pulsa"
+import Kereta from "./src/screens/EPayment/Kereta"
+import Listrik from "./src/screens/EPayment/Listrik"
+import Transfer from "./src/screens/EPayment/Transfer"
+
 import configureStore from "./src/store/configureStore";
 
 const store = configureStore();
@@ -84,7 +93,54 @@ Navigation.registerComponent(
     store,
     Provider
 );
-
+Navigation.registerComponent(
+    "STEMprasmul.Topup",
+    () => Topup,
+    store,
+    Provider
+);
+Navigation.registerComponent(
+    "STEMprasmul.History",
+    () => History,
+    store,
+    Provider
+);
+Navigation.registerComponent(
+    "STEMprasmul.OnProgress",
+    () => OnProgress,
+    store,
+    Provider
+);
+Navigation.registerComponent(
+    "STEMprasmul.ReadNews",
+    () => ReadNews,
+    store,
+    Provider
+);
+Navigation.registerComponent(
+    "STEMprasmul.Pulsa",
+    () => Pulsa,
+    store,
+    Provider
+);
+Navigation.registerComponent(
+    "STEMprasmul.Kereta",
+    () => Kereta,
+    store,
+    Provider
+);
+Navigation.registerComponent(
+    "STEMprasmul.Listrik",
+    () => Listrik,
+    store,
+    Provider
+);
+Navigation.registerComponent(
+    "STEMprasmul.Transfer",
+    () => Transfer,
+    store,
+    Provider
+);
 
 Navigation.startSingleScreenApp({
     screen: {
